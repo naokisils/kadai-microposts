@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_user_logged_in, only: [:index, :show]
   def index
     @pagy, @users= pagy(User.order(id: :desc), items:25)
   end
@@ -12,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user.User.new(user_params)
+    @user=User.new(user_params)
       if @user.save
         flash[:success]="ユーザを登録しました。"
         redirect_to @user
@@ -26,5 +27,5 @@ class UsersController < ApplicationController
   
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
-end
-
+  end
+end  
