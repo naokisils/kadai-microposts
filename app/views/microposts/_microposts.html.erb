@@ -1,4 +1,3 @@
-<% if microposts.any? %>
   <ul class="list-unstyled mt-2">
     <% microposts.each do |micropost| %>
       <li class="d-flex">
@@ -13,11 +12,11 @@
           <div>
             <% if current_user == micropost.user %>
               <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
-            <% end %>  
+             <% end %>  
+              <%= render "favorites/like_button", micropost: micropost %>
           </div>
         </div>
       </li>
     <% end %>
-  </ul>
-  <%== pagy_bootstrap_nav(@pagy) %>
-<% end %>
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </ul>  
